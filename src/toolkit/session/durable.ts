@@ -144,6 +144,19 @@ export class ChatDO {
       }
     }
 
+    // Application-owned persistent record. It is intentionally separate from
+    // the recyclable grammY session and has one record per private chat.
+    if (url.pathname === "/habits") {
+      if (request.method === "GET") {
+        const value = await this.state.storage.get<unknown>("habit-data");
+        return value === undefined ? new Response(null, { status: 204 }) : Response.json(value);
+      }
+      if (request.method === "PUT") {
+        await this.state.storage.put("habit-data", await request.json());
+        return new Response(null, { status: 204 });
+      }
+    }
+
     // Schedule a reminder + (re)arm the alarm to the earliest due one.
     if (url.pathname === "/remind" && request.method === "POST") {
       const rem = (await request.json()) as Reminder;

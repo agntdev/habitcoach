@@ -1,20 +1,8 @@
 [
   {
-    "name": "Weekly Recap",
+    "name": "Weekly recap has a welcoming empty state",
     "steps": [
-      {
-        "expect": [
-          {
-            "method": "sendMessage",
-            "payload": {
-              "text": "Display 7-day progress summary for all habits"
-            }
-          }
-        ],
-        "send": {
-          "callback": "recap:weekly"
-        }
-      }
+      { "send": { "callback": "recap:weekly" }, "expect": [{ "method": "sendMessage", "payload": { "text": "No habits to recap yet — tap ➕ Create habit and I’ll track your wins." } }] }
     ]
   }
 ]
