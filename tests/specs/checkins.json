@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Check-in locks after one tap",
+    "steps": [
+      { "send": { "callback": "habit:create" }, "expect": [{ "method": "sendMessage" }] },
+      { "send": { "text": "Walk" }, "expect": [{ "method": "sendMessage" }] },
+      { "send": { "callback": "habit:schedule:daily" }, "expect": [{ "method": "editMessageText" }] },
+      { "send": { "text": "09:00" }, "expect": [{ "method": "sendMessage" }] },
+      { "send": { "callback": "habit:tz:UTC" }, "expect": [{ "method": "sendMessage" }] },
+      { "send": { "callback": "check:done:1" }, "expect": [{ "method": "editMessageText", "payload": { "text": "Nice work — Walk is checked off. Your streak is 1 days." } }] },
+      { "send": { "callback": "check:done:1" }, "expect": [{ "method": "answerCallbackQuery" }] }
+    ]
+  }
+]

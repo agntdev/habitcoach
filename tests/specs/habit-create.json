@@ -1,20 +1,12 @@
 [
   {
-    "name": "Create New Habit",
+    "name": "Create a daily habit end to end",
     "steps": [
-      {
-        "expect": [
-          {
-            "method": "sendMessage",
-            "payload": {
-              "text": "Launch habit creation wizard with schedule configuration"
-            }
-          }
-        ],
-        "send": {
-          "callback": "habit:create"
-        }
-      }
+      { "send": { "callback": "habit:create" }, "expect": [{ "method": "sendMessage", "payload": { "text": "What habit would you like to build? Send a short name." } }] },
+      { "send": { "text": "Read" }, "expect": [{ "method": "sendMessage", "payload": { "text": "How often should you do it?" } }] },
+      { "send": { "callback": "habit:schedule:daily" }, "expect": [{ "method": "editMessageText", "payload": { "text": "What time should I remind you? Send it as HH:MM, like 08:30." } }] },
+      { "send": { "text": "08:30" }, "expect": [{ "method": "sendMessage", "payload": { "text": "What time zone should I use? Send an IANA name like Europe/London, or tap UTC." } }] },
+      { "send": { "callback": "habit:tz:UTC" }, "expect": [{ "method": "sendMessage", "payload": { "text": "You’re all set for Read at 08:30 (UTC). I’ll be here to cheer you on." } }] }
     ]
   }
 ]

@@ -6,7 +6,15 @@ import type { StorageAdapter } from "grammy";
 // bot grows. Durable domain data must NOT live here — use the toolkit's
 // persistent storage (see AGENTS.md).
 export interface Session {
-  // example: step?: "awaiting_amount";
+  wizard?: {
+    step: "title" | "time" | "timezone";
+    title?: string;
+    scheduleType?: "daily" | "weekdays" | "times";
+    reminderTime?: string;
+  };
+  /** Harness-only fallback when no durable runtime binding is available. */
+  habitReplayData?: import("./habit-core.js").HabitData;
+  editingHabitId?: string;
 }
 
 export type Ctx = BotContext<Session>;

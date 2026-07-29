@@ -1,20 +1,8 @@
 [
   {
-    "name": "My Habits",
+    "name": "Dashboard has a welcoming empty state",
     "steps": [
-      {
-        "expect": [
-          {
-            "method": "sendMessage",
-            "payload": {
-              "text": "Show swipeable habit cards with current status"
-            }
-          }
-        ],
-        "send": {
-          "callback": "habits:dashboard"
-        }
-      }
+      { "send": { "callback": "habits:dashboard" }, "expect": [{ "method": "sendMessage", "payload": { "text": "No habits yet — tap ➕ Create habit to build your first one." } }] }
     ]
   }
 ]
